@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	
+	<changeSet author="admin" id="1">
+	    <createTable tableName="ingredients">
+	        <column autoIncrement="true" name="ingredient_id" type="INT">
+	            <constraints primaryKey="true"/>
+	         </column>
+	         <column name="name" type="VARCHAR(45)">
+	            <constraints nullable="false"/>
+	         </column>
+	     </createTable>
+	</changeSet>
+
+    <changeSet author="admin" id="2">
+        <insert tableName="ingredients">
+            <column name="name" value="Flour"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Milk"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Oil"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Salt"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Sugar"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Eggs"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Tomatoes"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Pepers"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Cheese"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Potatoes"/>
+        </insert>
+        <insert tableName="ingredients">
+            <column name="name" value="Meat"/>
+        </insert>
+    </changeSet>
+    
+    <changeSet author="admin" id="3">
+    	<createTable tableName="recipes">
+            <column autoIncrement="true" name="recipe_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="source" type="VARCHAR(255)"/>
+             <column name="preparation_time" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="instructions" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="admin" id="4">
+    	<createTable tableName="recipe_ingredients">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="recipe_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ingredient_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet  author="admin"  id="5">  
+    <addForeignKeyConstraint  baseColumnNames="recipe_id"   
+            baseTableName="recipe_ingredients"  
+            constraintName="recipe_ingredients_ibfk_1"   
+            onDelete="CASCADE"  
+            onUpdate="CASCADE"  
+            referencedColumnNames="recipe_id"  
+            referencedTableName="recipes"/>
+            
+    <addForeignKeyConstraint  baseColumnNames="ingredient_id"   
+            baseTableName="recipe_ingredients"  
+            constraintName="recipe_ingredients_ibfk_2"  
+            onDelete="CASCADE"  
+            onUpdate="CASCADE"  
+            referencedColumnNames="ingredient_id"  
+            referencedTableName="ingredients"/>
+</changeSet>
+</databaseChangeLog>
